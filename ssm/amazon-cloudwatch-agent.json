@@ -6,7 +6,10 @@
       "InstanceId": "${aws:InstanceId}",
       "InstanceType": "${aws:InstanceType}"
     },
-    "aggregation_dimensions": [["ImageId"], ["InstanceType"]],
+    "aggregation_dimensions": [
+      ["ImageId"],
+      ["InstanceType"]
+    ],
     "metrics_collected": {
       "cpu": {
         "measurement": [
@@ -17,14 +20,19 @@
         ]
       },
       "disk": {
+        "resources": [
+            "/"
+        ],
         "measurement": [
           "disk_used_percent",
           "disk_inodes_free"
         ],
         "ignore_file_system_types": [
+          "rootfs",
           "tmpfs",
           "devtmpfs"
-        ]
+        ],
+        "drop_device": true
       },
       "mem": {
         "measurement": [
